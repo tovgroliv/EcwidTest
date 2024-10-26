@@ -25,38 +25,31 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+<script setup lang="ts">
 
-@Options({
-  props: {
+const props = defineProps({
     title: String,
     placeholder: String,
+});
+
+const handleInput = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  if (input.value) {
+    (input.parentNode as HTMLElement)?.classList.add('field--filled');
+  } else {
+    (input.parentNode as HTMLElement)?.classList.remove('field--filled');
   }
-})
-export default class Input extends Vue {
-  title!: string
-  placeholder!: string
+};
 
-  handleInput = (event: Event) => {
-    const input = event.target as HTMLInputElement;
-    if (input.value) {
-      (input.parentNode as HTMLElement)?.classList.add('field--filled');
-    } else {
-      (input.parentNode as HTMLElement)?.classList.remove('field--filled');
-    }
-  };
+const handleFocus = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  (input.parentNode as HTMLElement)?.classList.add('field--focus');
+};
 
-  handleFocus = (event: Event) => {
-    const input = event.target as HTMLInputElement;
-    (input.parentNode as HTMLElement)?.classList.add('field--focus');
-  };
-
-  handleBlur = (event: Event) => {
-    const input = event.target as HTMLInputElement;
-    (input.parentNode as HTMLElement)?.classList.remove('field--focus');
-  };
-}
+const handleBlur = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  (input.parentNode as HTMLElement)?.classList.remove('field--focus');
+};
 
 </script>
 

@@ -15,49 +15,17 @@
         <div class="flex-table__col flex-table__col--align-left">{{ product.id }}</div>
         <div class="flex-table__col flex-table__col--align-left">{{ product.name }}</div>
         <div class="flex-table__col flex-table__col--align-left">{{ product.price }}</div>
-        <div class="flex-table__col flex-table__col--align-left">{{ product.thumbnailUrl }}</div>
+        <div class="flex-table__col flex-table__col--align-left"><img :src="product.thumbnailUrl" width="100" /></div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+<script setup lang="ts">
+
 import Checkbox from './Checkbox.vue';
 
-@Options({
-  components: {
-    Checkbox,
-  },
-  props: {
-    products: Array<IProduct>()
-  }
-})
-
-export default class FlexTable extends Vue {
-  products!: IProduct[]
-}
-
-export interface IProduct {
-  id: number
-  name: string
-  thumbnailUrl: string
-  price: number
-}
-
-export class Product implements IProduct {
-  id: number
-  name: string
-  thumbnailUrl: string
-  price: number
-
-  constructor(id: number, name: string, thumbnailUrl: string, price: number) {
-    this.id = id
-    this.name = name
-    this.thumbnailUrl = thumbnailUrl
-    this.price = price
-  }
-}
+const props = defineProps(['products'])
 
 </script>
 

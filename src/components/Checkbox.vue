@@ -8,17 +8,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+<script setup lang="ts">
 
-@Options({
-  props: {
-    description: String
-  }
-})
-export default class Checkbox extends Vue {
-  description!: String
-}
+const props = defineProps({
+  description: String
+});
 
 </script>
 

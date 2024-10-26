@@ -16,19 +16,13 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+<script setup lang="ts">
 
-@Options({
-  props: {
+const props = defineProps({
     title: String,
     description: String,
-  }
-})
-export default class NamedArea extends Vue {
-  title!: string
-  description!: string
-}
+});
+
 </script>
 
 <style scoped></style>

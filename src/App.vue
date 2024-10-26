@@ -3,13 +3,15 @@
 </template>
 
 <script lang="ts">
+
 import { Options, Vue } from 'vue-class-component';
 import Settings from './components/Settings.vue';
+import SettingsViewModel from '@/viewmodel/SettingsViewModel';
 
-@Options({
+export default {
   components: {
     Settings,
   },
-})
-export default class App extends Vue {}
+}
+
 </script>
