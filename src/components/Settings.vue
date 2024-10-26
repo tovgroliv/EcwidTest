@@ -19,7 +19,8 @@
         <Input title="Count of suggestions" placeholder="Count" />
       </NamedArea>
       <NamedArea title="Export" description="Export some products to CSV.">
-        <Button @click="() => console.log('export')">Export to CSV ({{ selected }})</Button>
+        <Button @click="() => viewModel.ExportCsv()">Export selected products ({{ selected }})</Button>
+        <div style="height: 20px"></div>
         <FlexTable :products="products" @change="(product, checked) => OnChange(product, checked)" />
       </NamedArea>
     </div>

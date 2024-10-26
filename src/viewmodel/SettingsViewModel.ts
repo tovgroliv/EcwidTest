@@ -1,4 +1,5 @@
 import { IProduct } from "@/model/IProduct"
+import Papa from "papaparse"
 import IProductsResponse from "@/model/IProductsResponse"
 
 export default class SettingsViewModel {
@@ -22,5 +23,22 @@ export default class SettingsViewModel {
       console.error('products load error', error);
       return { total: 0, count: 0, items: [] }
     }
+  }
+
+  ExportCsv() {
+    var csv = Papa.unparse(Array.from(this.selected), {
+      columns: [
+        "id", "name", "price", "thumbnailUrl"
+      ]
+    })
+    const blob = new Blob([csv], { type: 'text/plain' });
+
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'exported.csv';
+    link.click();
+    
+    window.URL.revokeObjectURL(url);
   }
 }

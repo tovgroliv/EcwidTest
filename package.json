@@ -7,9 +7,11 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@types/papaparse": "^5.3.15",
     "axios": "^1.7.7",
     "core-js": "^3.8.3",
     "npm-watch": "^0.13.0",
+    "papaparse": "^5.4.1",
     "vue": "^3.2.13",
     "vue-class-component": "^8.0.0-0"
   },
