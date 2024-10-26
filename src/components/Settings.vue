@@ -19,8 +19,8 @@
         <Input title="Count of suggestions" placeholder="Count" />
       </NamedArea>
       <NamedArea title="Export" description="Export some products to CSV.">
-        <Button>Export to CSV</Button>
         <FlexTable :products="products" />
+        <Button @click="() => console.log('export')">Export to CSV</Button>
       </NamedArea>
     </div>
   </div>
