@@ -19,8 +19,8 @@
         <Input title="Count of suggestions" placeholder="Count" />
       </NamedArea>
       <NamedArea title="Export" description="Export some products to CSV.">
-        <FlexTable :products="products" />
-        <Button @click="() => console.log('export')">Export to CSV</Button>
+        <Button @click="() => console.log('export')">Export to CSV ({{ selected }})</Button>
+        <FlexTable :products="products" @change="(product, checked) => OnChange(product, checked)" />
       </NamedArea>
     </div>
   </div>
@@ -36,6 +36,7 @@ import FlexTable from './FlexTable.vue';
 import SettingsViewModel from '@/viewmodel/SettingsViewModel';
 import IProductsResponse from '@/model/IProductsResponse';
 import { IProduct } from '@/model/IProduct';
+import Checkbox from './Checkbox.vue';
 
 const props = defineProps({
   title: String,
@@ -44,10 +45,22 @@ const props = defineProps({
 
 const viewModel = new SettingsViewModel()
 let products = ref<Array<IProduct>>([])
+let selected = ref<number>(0)
 
 watchEffect(() => {
   viewModel?.response?.then(response => products.value = response.items)
 })
+
+function OnChange(product: IProduct, checked: Boolean) {
+  if (checked) {
+    viewModel.selected.add(product)
+  }
+  if (!checked) {
+    viewModel.selected.delete(product)
+  }
+
+  selected.value = viewModel?.selected.size ?? 0
+}
 
 </script>
 

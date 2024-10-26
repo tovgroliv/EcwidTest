@@ -10,7 +10,7 @@
     <div v-for="product in products">
       <div class="flex-table__row">
         <div class="flex-table__col flex-table__col--align-left">
-          <Checkbox />
+          <Checkbox @change="(checked) => OnChecked(product, checked)" :checked="false" />
         </div>
         <div class="flex-table__col flex-table__col--align-left">{{ product.id }}</div>
         <div class="flex-table__col flex-table__col--align-left">{{ product.name }}</div>
@@ -23,9 +23,15 @@
 
 <script setup lang="ts">
 
+import { IProduct } from '@/model/IProduct';
 import Checkbox from './Checkbox.vue';
 
 const props = defineProps(['products'])
+const emit = defineEmits(['change'])
+
+function OnChecked(product: IProduct, checked: boolean) {
+  emit('change', product, checked)
+}
 
 </script>
 

@@ -1,14 +1,11 @@
+import { IProduct } from "@/model/IProduct"
 import IProductsResponse from "@/model/IProductsResponse"
 
 export default class SettingsViewModel {
-  response?: Promise<IProductsResponse>//IProductsResponse
+  response?: Promise<IProductsResponse>
+  selected: Set<IProduct> = new Set<IProduct>()
 
   constructor() {
-    // this.getProducts()
-    //   .then(response => {
-    //     console.log(response)
-    //     this.response = response
-    //   })
     this.response = this.getProducts()
   }
 
