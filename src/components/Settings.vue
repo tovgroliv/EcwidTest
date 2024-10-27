@@ -16,7 +16,8 @@
         </label>
       </NamedArea>
       <NamedArea title="Component settings" description="Some component settings.">
-        <Input title="Count of suggestions" placeholder="Count" />
+        <Input title="Count of suggestions" placeholder="Count" v-model="viewModel.settings.suggestionCount" />
+        <Button @click="() => viewModel.UpdateSuggestionCount(0)">Save</Button>
       </NamedArea>
       <NamedArea title="Export" description="Export some products to CSV.">
         <Button @click="() => viewModel.ExportCsv()">Export selected products ({{ selected }})</Button>
@@ -35,9 +36,7 @@ import Input from './Input.vue';
 import Button from './Button.vue';
 import FlexTable from './FlexTable.vue';
 import SettingsViewModel from '@/viewmodel/SettingsViewModel';
-import IProductsResponse from '@/model/IProductsResponse';
 import { IProduct } from '@/model/IProduct';
-import Checkbox from './Checkbox.vue';
 
 const props = defineProps({
   title: String,
@@ -50,6 +49,7 @@ let selected = ref<number>(0)
 
 watchEffect(() => {
   viewModel?.response?.then(response => products.value = response.items)
+  // viewModel?.settings.suggestionCount = 
 })
 
 function OnChange(product: IProduct, checked: Boolean) {

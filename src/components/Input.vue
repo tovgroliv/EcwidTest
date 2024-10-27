@@ -4,8 +4,8 @@
     <div class="field field--medium">
       <span class="fieldset__svg-icon"></span>
       <label class="field__label">{{ placeholder }}</label>
-      <input type="number" min="0" class="field__input" tabindex="4" maxlength="64" @input="handleInput" @focus="handleFocus"
-        @blur="handleBlur">
+      <input type="number" min="0" class="field__input" tabindex="4" maxlength="64" :value="defaultValue" @input="handleInput"
+        @focus="handleFocus" @blur="handleBlur">
       <div class="field__placeholder">{{ placeholder }}</div>
       <span class="field-state--success"><svg xmlns="http://www.w3.org/2000/svg" width="26px" height="26px"
           viewBox="0 0 26 26" focusable="false">
@@ -27,9 +27,12 @@
 
 <script setup lang="ts">
 
+const model = defineModel()
+
 const props = defineProps({
-    title: String,
-    placeholder: String,
+  title: String,
+  placeholder: String,
+  defaultValue: Number,
 });
 
 const handleInput = (event: Event) => {
@@ -39,6 +42,13 @@ const handleInput = (event: Event) => {
   } else {
     (input.parentNode as HTMLElement)?.classList.remove('field--filled');
   }
+  
+  let value: number = parseInt(input.value.replace(/[^0-9]/g, '')) || 0
+  value = Math.max(value, 0)
+  value = Math.min(value, 10)
+  input.value = value.toString()
+
+  model.value = value
 };
 
 const handleFocus = (event: Event) => {

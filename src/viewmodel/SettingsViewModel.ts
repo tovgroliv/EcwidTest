@@ -1,10 +1,13 @@
 import { IProduct } from "@/model/IProduct"
 import Papa from "papaparse"
 import IProductsResponse from "@/model/IProductsResponse"
+import { Settings } from "@/model/Settings"
 
 export default class SettingsViewModel {
   response?: Promise<IProductsResponse>
   selected: Set<IProduct> = new Set<IProduct>()
+
+  settings: Settings = new Settings()
 
   constructor() {
     this.response = this.getProducts()
@@ -38,7 +41,15 @@ export default class SettingsViewModel {
     link.href = url;
     link.download = 'exported.csv';
     link.click();
-    
+
     window.URL.revokeObjectURL(url);
+  }
+
+  UpdateSuggestionCount(count: number) {
+    
+  }
+
+  TurnOnOff(enabled: boolean) {
+    
   }
 }
