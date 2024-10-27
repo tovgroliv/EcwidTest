@@ -14,12 +14,12 @@ const emit = defineEmits(['change'])
 
 const props = defineProps({
   defaultValue: Boolean,
-});
+})
 
 const handleChange = (event: Event) => {
   model.value = (event.target as HTMLInputElement).checked
   emit('change')
-};
+}
 
 </script>
 

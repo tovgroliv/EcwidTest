@@ -8,10 +8,10 @@
     </div>
     <div class="settings-page__body">
       <NamedArea title="Turn on/off" description="Enable or disable the component.">
-        <Toggle @change="() => viewModel.TurnOnOff()" v-model="viewModel.settings.enabled" />
+        <Toggle @change="() => viewModel.TurnOnOff()" :defaultValue="enabled" v-model="viewModel.settings.enabled" />
       </NamedArea>
       <NamedArea title="Component settings" description="Some component settings.">
-        <Input title="Count of suggestions" placeholder="Count" :defaultValue="viewModel.settings.suggestionCount" v-model="viewModel.settings.suggestionCount" />
+        <Input title="Count of suggestions" placeholder="Count" :defaultValue="suggestionCount" v-model="viewModel.settings.suggestionCount" />
         <div style="height: 10px"></div>
         <Button @click="() => viewModel.UpdateSuggestionCount()">Save</Button>
       </NamedArea>
@@ -41,11 +41,17 @@ const props = defineProps({
 });
 
 const viewModel = new SettingsViewModel()
-let products = ref<Array<IProduct>>([])
-let selected = ref<number>(0)
+const products = ref<Array<IProduct>>([])
+const selected = ref<number>(0)
+const enabled = ref<boolean>(false)
+const suggestionCount = ref<number>(0)
 
 watchEffect(() => {
   viewModel?.response?.then(response => products.value = response.items)
+  viewModel?.settingsResponse?.then(response => {
+    enabled.value = response.enabled
+    suggestionCount.value = response.suggestionCount
+  })
 })
 
 function OnChange(product: IProduct, checked: Boolean) {

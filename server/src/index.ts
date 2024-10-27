@@ -7,7 +7,7 @@ dotenv.config({
   path: __dirname + "/../.env"
 })
 
-let settings = new Settings()
+let settings: Settings = new Settings()
 const settingsPath = __dirname + '/../settings.json'
 if (!fs.existsSync(settingsPath)) {
   const json = JSON.stringify(settings)
@@ -22,7 +22,10 @@ const server = fastify()
 
 const start = async () => {
   try {
-    await server.listen({ port: 3000 })
+    await server.listen({
+      port: 3000,
+      host: "localhost"
+    })
     console.log('Server started successfully')
   } catch (err) {
     server.log.error(err)
@@ -31,14 +34,20 @@ const start = async () => {
 }
 start()
 
-const key = "asdasd"
-
 server.post('/settings', {}, async (request, reply) => {
   try {
-    console.log(request.body)
+    reply.header("Access-Control-Allow-Origin", "*")
+    reply.header("Access-Control-Allow-Methods", "POST")
+    
+    const temp:Settings = JSON.parse(`${request.body}`) as Settings
+    if (temp != undefined) {
+      settings = temp
+      fs.writeFileSync(settingsPath, JSON.stringify(settings))
+    }
+
     return reply
       .code(200)
-      .send(key)
+      .send()
   } catch (error) {
     request.log.error(error)
     return reply.send(500)
@@ -47,7 +56,8 @@ server.post('/settings', {}, async (request, reply) => {
 
 server.get('/settings', {}, async (request, reply) => {
   try {
-    console.log(request.body)
+    reply.header("Access-Control-Allow-Origin", "*")
+    reply.header("Access-Control-Allow-Methods", "POST")
     return reply
       .code(200)
       .send(JSON.stringify(settings))

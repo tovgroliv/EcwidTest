@@ -6,7 +6,8 @@ import { Settings } from "@/model/Settings"
 export default class SettingsViewModel {
   response?: Promise<IProductsResponse>
   selected: Set<IProduct> = new Set<IProduct>()
-
+  
+  settingsResponse?: Promise<Settings>
   settings: Settings = new Settings()
 
   private readonly storeKey = '101560752'
@@ -14,11 +15,12 @@ export default class SettingsViewModel {
   private readonly secretKey = ''
 
   constructor() {
-    // this.Load()
-    //   .then(value => this.settings = value)
-
-    this.LoadLocal()
-      .then(value => this.settings = value)
+    this.settingsResponse = this.LoadLocal()
+    this.settingsResponse
+      .then(value => {
+        this.settings.enabled = value.enabled
+        this.settings.suggestionCount = value.suggestionCount
+      })
 
     this.response = this.getProducts()
   }
@@ -56,16 +58,16 @@ export default class SettingsViewModel {
   }
 
   UpdateSuggestionCount() {
-    console.log(this.settings.suggestionCount)
+    this.UpdateLocal()
   }
 
   TurnOnOff() {
-    console.log(this.settings.enabled)
+    this.UpdateLocal()
   }
 
   private async Update() {
     try {
-     await fetch(`https://app.ecwid.com/api/v3/${this.storeKey}/storage/settings`, {
+      await fetch(`https://app.ecwid.com/api/v3/${this.storeKey}/storage/settings`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${this.secretKey}`
@@ -89,20 +91,18 @@ export default class SettingsViewModel {
       return (await response.json()) as Settings
     } catch (error) {
       console.error('update settings error', error);
-      return { enabled: false, suggestionCount: 0  }
+      return { enabled: false, suggestionCount: 0 }
     }
   }
 
-  private async UpdateLocal(): Promise<Settings> {
+  private UpdateLocal() {
     try {
-      const response = await fetch(`http://localhost:3000/settings`, {
+      fetch(`http://localhost:3000/settings`, {
         method: "POST",
         body: JSON.stringify(this.settings)
       })
-      return (await response.json()) as Settings
     } catch (error) {
       console.error('update settings error', error);
-      return { enabled: false, suggestionCount: 0  }
     }
   }
 
@@ -110,12 +110,11 @@ export default class SettingsViewModel {
     try {
       const response = await fetch(`http://localhost:3000/settings`, {
         method: "GET",
-        mode: "no-cors"
       })
       return (await response.json()) as Settings
     } catch (error) {
-      console.error('update settings error', error);
-      return { enabled: false, suggestionCount: 0  }
+      console.error('load settings error', error);
+      return { enabled: false, suggestionCount: 0 }
     }
   }
 }
