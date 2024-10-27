@@ -2,7 +2,6 @@ import { IProduct } from "@/model/IProduct"
 import Papa from "papaparse"
 import IProductsResponse from "@/model/IProductsResponse"
 import { Settings } from "@/model/Settings"
-import * as dotenv from 'dotenv'
 
 export default class SettingsViewModel {
   response?: Promise<IProductsResponse>
@@ -15,11 +14,11 @@ export default class SettingsViewModel {
   private readonly secretKey = ''
 
   constructor() {
-    // this.storeKey = process.env.STORE_KEY ?? ""
-    // this.publicKey = process.env.PUBLIC_KEY ?? ""
-    // this.secretKey = process.env.SECRET_KEY ?? ""
     // this.Load()
     //   .then(value => this.settings = value)
+
+    this.LoadLocal()
+      .then(value => this.settings = value)
 
     this.response = this.getProducts()
   }
@@ -82,10 +81,36 @@ export default class SettingsViewModel {
   private async Load(): Promise<Settings> {
     try {
       const response = await fetch(`https://app.ecwid.com/api/v3/${this.storeKey}/storage/settings`, {
-        method: "GET",
+        method: "POST",
         headers: {
           "Authorization": `Bearer ${this.secretKey}`
         }
+      })
+      return (await response.json()) as Settings
+    } catch (error) {
+      console.error('update settings error', error);
+      return { enabled: false, suggestionCount: 0  }
+    }
+  }
+
+  private async UpdateLocal(): Promise<Settings> {
+    try {
+      const response = await fetch(`http://localhost:3000/settings`, {
+        method: "POST",
+        body: JSON.stringify(this.settings)
+      })
+      return (await response.json()) as Settings
+    } catch (error) {
+      console.error('update settings error', error);
+      return { enabled: false, suggestionCount: 0  }
+    }
+  }
+
+  private async LoadLocal(): Promise<Settings> {
+    try {
+      const response = await fetch(`http://localhost:3000/settings`, {
+        method: "GET",
+        mode: "no-cors"
       })
       return (await response.json()) as Settings
     } catch (error) {

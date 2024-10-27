@@ -15,6 +15,7 @@
     "crypto-browserify": "^3.12.1",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
+    "fastify": "^5.0.0",
     "fs": "^0.0.1-security",
     "node-polyfill-webpack-plugin": "^4.0.0",
     "npm-watch": "^0.13.0",
