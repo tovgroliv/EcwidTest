@@ -45,11 +45,11 @@ export default class SettingsViewModel {
     window.URL.revokeObjectURL(url);
   }
 
-  UpdateSuggestionCount(count: number) {
-    
+  UpdateSuggestionCount() {
+    console.log(this.settings.suggestionCount)
   }
 
-  TurnOnOff(enabled: boolean) {
-    
+  TurnOnOff() {
+    console.log(this.settings.enabled)
   }
 }

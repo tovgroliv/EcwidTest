@@ -1,7 +1,7 @@
 <template>
   <div class="fieldset">
     <div class="fieldset__title">{{ title }}</div>
-    <div class="field field--medium">
+    <div class="field field--medium field--filled">
       <span class="fieldset__svg-icon"></span>
       <label class="field__label">{{ placeholder }}</label>
       <input type="number" min="0" class="field__input" tabindex="4" maxlength="64" :value="defaultValue" @input="handleInput"
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 
-const model = defineModel()
+const model = defineModel<number>()
 
 const props = defineProps({
   title: String,

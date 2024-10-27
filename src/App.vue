@@ -5,7 +5,7 @@
 <script lang="ts">
 
 import { Options, Vue } from 'vue-class-component';
-import Settings from './components/Settings.vue';
+import Settings from '@/view/Settings.vue';
 import SettingsViewModel from '@/viewmodel/SettingsViewModel';
 
 export default {

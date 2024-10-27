@@ -8,20 +8,16 @@
     </div>
     <div class="settings-page__body">
       <NamedArea title="Turn on/off" description="Enable or disable the component.">
-        <label class="checkbox">
-          <input type="checkbox">
-          <div data-on="enabled" data-off="disabled">
-            <div></div>
-          </div>
-        </label>
+        <Toggle @change="() => viewModel.TurnOnOff()" v-model="viewModel.settings.enabled" />
       </NamedArea>
       <NamedArea title="Component settings" description="Some component settings.">
-        <Input title="Count of suggestions" placeholder="Count" v-model="viewModel.settings.suggestionCount" />
-        <Button @click="() => viewModel.UpdateSuggestionCount(0)">Save</Button>
+        <Input title="Count of suggestions" placeholder="Count" :defaultValue="viewModel.settings.suggestionCount" v-model="viewModel.settings.suggestionCount" />
+        <div style="height: 10px"></div>
+        <Button @click="() => viewModel.UpdateSuggestionCount()">Save</Button>
       </NamedArea>
       <NamedArea title="Export" description="Export some products to CSV.">
         <Button @click="() => viewModel.ExportCsv()">Export selected products ({{ selected }})</Button>
-        <div style="height: 20px"></div>
+        <div style="height: 10px"></div>
         <FlexTable :products="products" @change="(product, checked) => OnChange(product, checked)" />
       </NamedArea>
     </div>
@@ -31,10 +27,11 @@
 <script setup lang="ts">
 
 import { watchEffect, ref } from 'vue';
-import NamedArea from './NamedArea.vue';
-import Input from './Input.vue';
-import Button from './Button.vue';
-import FlexTable from './FlexTable.vue';
+import NamedArea from '@/components/NamedArea.vue';
+import Toggle from '@/components/Toggle.vue';
+import Input from '@/components/Input.vue';
+import Button from '@/components/Button.vue';
+import FlexTable from '@/components/FlexTable.vue';
 import SettingsViewModel from '@/viewmodel/SettingsViewModel';
 import { IProduct } from '@/model/IProduct';
 
