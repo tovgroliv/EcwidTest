@@ -46,7 +46,6 @@ let selected = ref<number>(0)
 
 watchEffect(() => {
   viewModel?.response?.then(response => products.value = response.items)
-  // viewModel?.settings.suggestionCount = 
 })
 
 function OnChange(product: IProduct, checked: Boolean) {

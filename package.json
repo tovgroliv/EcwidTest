@@ -7,9 +7,16 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@types/node": "^22.8.1",
     "@types/papaparse": "^5.3.15",
     "axios": "^1.7.7",
     "core-js": "^3.8.3",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.1",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security",
+    "node-polyfill-webpack-plugin": "^4.0.0",
     "npm-watch": "^0.13.0",
     "papaparse": "^5.4.1",
     "vue": "^3.2.13",
