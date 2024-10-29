@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 
-import { IProduct } from '@/model/IProduct';
+import { IProduct } from '@/admin/model/IProduct';
 import Checkbox from './Checkbox.vue';
 
 const props = defineProps(['products'])

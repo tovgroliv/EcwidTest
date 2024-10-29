@@ -1,7 +1,7 @@
-import { IProduct } from "@/model/IProduct"
+import { IProduct } from "@/admin/model/IProduct"
 import Papa from "papaparse"
-import IProductsResponse from "@/model/IProductsResponse"
-import { Settings } from "@/model/Settings"
+import IProductsResponse from "@/admin/model/IProductsResponse"
+import { Settings } from "@/admin/model/Settings"
 
 export default class SettingsViewModel {
   response?: Promise<IProductsResponse>

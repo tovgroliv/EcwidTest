@@ -5,8 +5,8 @@
 <script lang="ts">
 
 import { Options, Vue } from 'vue-class-component';
-import Settings from '@/view/Settings.vue';
-import SettingsViewModel from '@/viewmodel/SettingsViewModel';
+import Settings from '@/admin/view/Settings.vue';
+import SettingsViewModel from '@/admin/viewmodel/SettingsViewModel';
 
 export default {
   components: {
