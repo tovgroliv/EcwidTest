@@ -1,6 +1,9 @@
 import './styles.css';
 import SettingsViewModel from './viewmodel/SettingsViewModel';
 
+import { createApp } from 'vue';
+import App from './App.vue';
+
 let viewModel = new SettingsViewModel()
 let loaded: Boolean = false
 
@@ -19,9 +22,11 @@ if (viewModel.validate()) {
 
           var footer = document.getElementsByClassName("ec-store__content-wrapper")[0]
           const textNode = document.createElement("div")
-          textNode.innerHTML = "Test"
           textNode.classList.add("widget_under_cart")
+          textNode.id = "test-app"
           footer?.appendChild(textNode)
+
+          createApp(App).mount('#test-app')
         }
         loaded = true
       }
