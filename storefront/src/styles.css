@@ -1,3 +1,13 @@
-div {
-    display: block;
+.ec-cart {
+    order: 0;
+}
+.ec-footer {
+    order: 2;
+}
+.ec-store__content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.widget_under_cart {
+    order: 1;
 }
