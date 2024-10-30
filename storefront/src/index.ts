@@ -18,15 +18,18 @@ if (viewModel.validate()) {
           viewModel.getProducts()
             .then(value => {
               console.log(value)
+
+
+              var footer = document.getElementsByClassName("ec-store__content-wrapper")[0]
+              const textNode = document.createElement("div")
+              textNode.classList.add("widget_under_cart")
+              textNode.id = "test-app"
+              footer?.appendChild(textNode)
+
+              createApp(App, {
+                "products": value
+              }).mount(textNode)
             })
-
-          var footer = document.getElementsByClassName("ec-store__content-wrapper")[0]
-          const textNode = document.createElement("div")
-          textNode.classList.add("widget_under_cart")
-          textNode.id = "test-app"
-          footer?.appendChild(textNode)
-
-          createApp(App).mount('#test-app')
         }
         loaded = true
       }

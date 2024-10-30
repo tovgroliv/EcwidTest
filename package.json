@@ -7,7 +7,6 @@
     "watch:admin": "cd admin && npm run serve",
     "watch:storefront": "cd storefront && npm run serve",
     "watch:all": "concurrently \"npm run watch:admin\" \"npm run watch:storefront\"",
-
     "build:admin": "cd admin && npm run build",
     "build:storefront": "cd storefront && npm run build",
     "build:all": "npm run build:admin && npm run build:storefront"

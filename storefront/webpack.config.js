@@ -1,5 +1,6 @@
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -17,8 +18,12 @@ module.exports = {
       },
       {
         test: /\.ts$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+        use: {
+          loader: 'ts-loader',
+          options: {
+            appendTsSuffixTo: [/\.vue$/]
+          }
+        }
       },
       {
         test: /\.css$/,
@@ -28,14 +33,15 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
+    new HtmlWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'style.min.css' // Укажите имя для выходного CSS-файла
+      filename: 'style.min.css'
     })
   ],
   resolve: {
     extensions: ['.ts', '.js', '.vue'],
     alias: {
-      vue: '@vue/runtime-dom'
+      vue: 'vue'
     }
   },
   devServer: {

@@ -11,3 +11,6 @@
 .widget_under_cart {
     order: 1;
 }
+.buy_now_button {
+    order: 100;
+}
