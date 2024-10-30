@@ -27,13 +27,13 @@
 <script setup lang="ts">
 
 import { watchEffect, ref } from 'vue';
-import NamedArea from '@/admin/components/NamedArea.vue';
-import Toggle from '@/admin/components/Toggle.vue';
-import Input from '@/admin/components/Input.vue';
-import Button from '@/admin/components/Button.vue';
-import FlexTable from '@/admin/components/FlexTable.vue';
-import SettingsViewModel from '@/admin/viewmodel/SettingsViewModel';
-import { IProduct } from '@/admin/model/IProduct';
+import NamedArea from '@/components/NamedArea.vue';
+import Toggle from '@/components/Toggle.vue';
+import Input from '@/components/Input.vue';
+import Button from '@/components/Button.vue';
+import FlexTable from '@/components/FlexTable.vue';
+import SettingsViewModel from '@/viewmodel/SettingsViewModel';
+import { IProduct } from '@/model/IProduct';
 
 const props = defineProps({
   title: String,
