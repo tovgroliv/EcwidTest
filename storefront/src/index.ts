@@ -27,7 +27,8 @@ if (viewModel.validate()) {
               footer?.appendChild(textNode)
 
               createApp(App, {
-                "products": value
+                "products": value,
+                "viewModel": viewModel
               }).mount(textNode)
             })
         }

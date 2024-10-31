@@ -10,6 +10,9 @@
 }
 .widget_under_cart {
     order: 1;
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 .buy_now_button {
     order: 100;

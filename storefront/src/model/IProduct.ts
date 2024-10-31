@@ -2,5 +2,7 @@ export interface IProduct {
   id: number
   name: string
   thumbnailUrl: string
-  price: number
+  url: string
+  price: number,
+  defaultDisplayedPriceFormatted: string
 }

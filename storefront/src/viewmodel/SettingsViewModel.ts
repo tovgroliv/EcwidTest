@@ -48,4 +48,19 @@ export default class SettingsViewModel {
       return { total: 0, count: 0, items: [] }
     }
   }
+
+  async addInCart(product: IProduct) {
+    if (!this.validate())
+      return
+
+    const data = {
+      id: product.id,
+      quantity: 1,
+      // callback: function(success, product, cart) {
+        
+      // }
+    }
+
+    this.ecwid.Cart.addProduct(data)
+  }
 }
