@@ -8,12 +8,12 @@
     </div>
     <div class="settings-page__body">
       <NamedArea title="Turn on/off" description="Enable or disable the component.">
-        <Toggle @change="() => viewModel.TurnOnOff()" :defaultValue="enabled" v-model="viewModel.settings.enabled" />
+        <Toggle @change="() => viewModel.Update()" :defaultValue="enabled" v-model="viewModel.settings.enabled" />
       </NamedArea>
       <NamedArea title="Component settings" description="Some component settings.">
         <Input title="Count of suggestions" placeholder="Count" :defaultValue="suggestionCount" v-model="viewModel.settings.suggestionCount" />
         <div style="height: 10px"></div>
-        <Button @click="() => viewModel.UpdateSuggestionCount()">Save</Button>
+        <Button @click="() => viewModel.Update()">Save</Button>
       </NamedArea>
       <NamedArea title="Export" description="Export some products to CSV.">
         <Button @click="() => viewModel.ExportCsv()">Export selected products ({{ selected }})</Button>

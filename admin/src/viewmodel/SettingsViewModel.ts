@@ -2,6 +2,9 @@ import { IProduct } from "@/model/IProduct"
 import Papa from "papaparse"
 import IProductsResponse from "@/model/IProductsResponse"
 import { Settings } from "@/model/Settings"
+import { IEcwidApp } from "@/model/IEcwidApp"
+
+declare var EcwidApp: IEcwidApp
 
 export default class SettingsViewModel {
   response?: Promise<IProductsResponse>
@@ -10,9 +13,9 @@ export default class SettingsViewModel {
   settingsResponse?: Promise<Settings>
   settings: Settings = new Settings()
 
+  readonly ecwid:IEcwidApp = EcwidApp
   private readonly storeKey = '101560752'
   private readonly publicKey = 'public_eaBDuVmrse1hKZun4qaPF3LewugrnEgq'
-  private readonly secretKey = ''
 
   constructor() {
     this.settingsResponse = this.Load()
@@ -57,18 +60,9 @@ export default class SettingsViewModel {
     window.URL.revokeObjectURL(url)
   }
 
-  UpdateSuggestionCount() {
-    this.Update()
-  }
-
-  TurnOnOff() {
-    this.Update()
-  }
-
-  private Update() {
+  Update() {
     try {
-      //@ts-ignore
-      EcwidApp.setAppStorage({
+      this.ecwid.setAppStorage({
         public: JSON.stringify(this.settings)
       }, () => {
         console.log("saved alright")
@@ -83,8 +77,7 @@ export default class SettingsViewModel {
   private async Load(): Promise<Settings> {
     try {
       return new Promise((resolve, reject) => {
-        //@ts-ignore
-        EcwidApp.getAppPublicConfig((value: string | null) => {
+        this.ecwid.getAppPublicConfig((value: string | null) => {
           if (value) {
             this.settings = JSON.parse(value)
             resolve(this.settings)
@@ -94,29 +87,6 @@ export default class SettingsViewModel {
     } catch (error) {
       console.error('load settings error', error);
       this.Update()
-      return { enabled: false, suggestionCount: 0 }
-    }
-  }
-
-  private UpdateLocal() {
-    try {
-      fetch(`http://localhost:3000/settings`, {
-        method: "POST",
-        body: JSON.stringify(this.settings)
-      })
-    } catch (error) {
-      console.error('update settings error', error);
-    }
-  }
-
-  private async LoadLocal(): Promise<Settings> {
-    try {
-      const response = await fetch(`http://localhost:3000/settings`, {
-        method: "GET",
-      })
-      return (await response.json()) as Settings
-    } catch (error) {
-      console.error('load settings error', error);
       return { enabled: false, suggestionCount: 0 }
     }
   }

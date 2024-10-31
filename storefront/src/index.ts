@@ -8,11 +8,8 @@ let viewModel = new SettingsViewModel()
 let loaded: Boolean = false
 
 if (viewModel.validate()) {
-  //@ts-ignore
-  const ecwid = Ecwid;
-  ecwid.OnAPILoaded.add(function () {
-    //@ts-ignore
-    ecwid.OnPageLoaded.add(function (page) {
+  viewModel.ecwid.OnAPILoaded.add(function () {
+    viewModel.ecwid.OnPageLoaded.add(function (page) {
       if (page.type == "CART") {
         if (loaded) {
           viewModel.getProducts()

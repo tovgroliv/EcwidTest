@@ -1,14 +1,17 @@
+import { ICartAddData } from "@/model/ICartAddData"
+import { IEcwid } from "../model/IEcwid"
 import { IProduct } from "../model/IProduct"
 import IProductsResponse from "../model/IProductsResponse"
 import { Settings } from "../model/Settings"
+
+declare var Ecwid: IEcwid
 
 export default class SettingsViewModel {
   response?: Promise<IProductsResponse>
   settings: Settings = new Settings()
 
-  //@ts-ignore
-  private readonly ecwid = Ecwid
-  private readonly storeKey?: String
+  readonly ecwid:IEcwid = Ecwid
+  private readonly storeKey?: number
   private readonly publicKey?: String
 
   constructor() {
@@ -16,7 +19,7 @@ export default class SettingsViewModel {
     this.publicKey = this.ecwid.getAppPublicToken('cstmz-101560752-test-app')
 
     const publicConfig = this.ecwid.getAppPublicConfig('cstmz-101560752-test-app')
-    this.settings = JSON.parse(publicConfig)
+    this.settings = JSON.parse(publicConfig ?? "{}")
 
     this.storeKey ?? console.error('[test-app] store id load error')
     this.publicKey ?? console.error('[test-app] public key load error')
@@ -53,12 +56,9 @@ export default class SettingsViewModel {
     if (!this.validate())
       return
 
-    const data = {
+    const data: ICartAddData = {
       id: product.id,
       quantity: 1,
-      // callback: function(success, product, cart) {
-        
-      // }
     }
 
     this.ecwid.Cart.addProduct(data)

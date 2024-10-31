@@ -1,19 +1,27 @@
 .ec-cart {
-    order: 0;
+  order: 0;
 }
+
 .ec-footer {
-    order: 2;
+  order: 2;
 }
+
 .ec-store__content-wrapper {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
+
 .widget_under_cart {
-    order: 1;
-    display: flex;
-    justify-content: center;
-    align-content: center;
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
+
 .buy_now_button {
-    order: 100;
+  order: 100;
+}
+
+.grid__wrap {
+  width: 100%;
 }
