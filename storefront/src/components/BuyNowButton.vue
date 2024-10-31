@@ -23,7 +23,7 @@ let animated = ref(true)
 const emit = defineEmits(['click'])
 
 function onClick() {
-  // emit('click')
+  emit('click')
   animated.value = false
   setTimeout(() => {
     animated.value = true
