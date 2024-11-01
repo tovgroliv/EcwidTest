@@ -1,13 +1,13 @@
 FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install
+COPY admin/package*.json ./admin/
+
+COPY storefront/package*.json ./storefront/
+
+RUN npm run install:all
 
 COPY . .
-
-CMD ["npm", "run", "serve"]
-
-EXPOSE 8080

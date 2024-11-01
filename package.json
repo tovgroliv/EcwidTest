@@ -4,6 +4,7 @@
   "description": "## Client",
   "main": "index.js",
   "scripts": {
+    "install:all": "npm install && npm install --prefix=storefront && npm install --prefix=admin",
     "watch:admin": "cd admin && npm run serve",
     "watch:storefront": "cd storefront && npm run serve",
     "watch:all": "concurrently \"npm run watch:admin\" \"npm run watch:storefront\"",

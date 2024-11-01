@@ -1,23 +1,22 @@
 version: '3'
+
 services:
   admin:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    working_dir: /app/admin
+    build: .
+    command: npm run watch:admin
+    working_dir: /usr/src/app/admin
     ports:
       - "8080:8080"
     volumes:
-      - .:/app
-    command: npm run serve
+      - .:/usr/src/app/admin
+      - /usr/src/app/admin/node_modules
 
   storefront:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    working_dir: /app/storefront
+    build: .
+    command: npm run watch:storefront
+    working_dir: /usr/src/app/storefront
     ports:
       - "8081:8081"
     volumes:
-      - .:/app
-    command: npm run serve
+      - .:/usr/src/app/storefront
+      - /usr/src/app/storefront/node_modules
