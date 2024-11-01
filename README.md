@@ -1,38 +1,15 @@
 # Ecwid test task
 
-## Client
+## Run
 
-### Project setup
 ```
-npm install
-```
-
-#### Compiles and hot-reloads for development
-```
-npm run serve
+docker-compose up --build
 ```
 
-#### Compiles and minifies for production
-```
-npm run build
-```
+## Requires
 
-## Server
-
-### Project setup
-```
-npm install
-```
-
-#### Compiles and hot-reloads for development
-```
-npm run dev
-```
-
-#### Compiles and minifies for production
-```
-npm run build
-```
+ - docker
+ - docker-compose
 
 ## Writing Task
 
@@ -46,15 +23,12 @@ npm run build
 
 Развернуть REST API сервер для последующего применения.
 
-Необходимо реализовать (read/update/delete) модель для купонов и связать ее с акцией. Купоны содержат дату создания:
- - дату истечения;
- - процент скидки;
- - статус (использован или нет);
- - код (для применения пользователем);
+Необходимо реализовать (read/update/delete) модель для купонов и связать ее с акцией и ваучером. Купоны содержат дату создания:
  - ссылка на акцию;
+ - код на ваучер;
  - ссылка на пользователя (если купон индивидуальный).
 
-Необходимо реализовать (read/update/delete) модель для акции\. Акция содержит:
+Необходимо реализовать (read/update/delete) модель для акции. Акция содержит:
  - дату создания;
  - дату окончания;
  - ссылку на баннер;
@@ -77,6 +51,10 @@ npm run build
  - имелись товары из списка акций.
 После успешного оформления заказа сформировать новый купон и сохранить его. Так же подготовить email письмо и отправить его пользователю.
 
+[API добавить купон](https://api-docs.ecwid.com/reference/create-discount-coupon);
+[API поиск заказов](https://api-docs.ecwid.com/reference/search-orders);
+[API обработки запроса на скидки](https://api-docs.ecwid.com/reference/process-discount-request);
+
 4. Реализовать применение купонов (3-5 часов)
 
 Реализовать на странице оформления заказа возможность ввести и применить купон. После ввода пользователем купона необходимо провести валидацию. Проверить:
@@ -84,6 +62,10 @@ npm run build
  - если индивидуальный, то проверить тот ли это пользователь;
  - проверить количество покупок пользователя (должна быть только одна);
  - проверить не истек ли купон.
+
+[API поиск заказов](https://api-docs.ecwid.com/reference/search-orders);
+[API обработки запроса на скидки](https://api-docs.ecwid.com/reference/process-discount-request);
+[API поиск купонов](https://api-docs.ecwid.com/reference/search-discount-coupons);
 
 Если валидация прошла успешна, изменить цену заказа.
 
@@ -99,7 +81,7 @@ npm run build
     - по нажатию на акцию появляется вся доступная информация о ней;
     - акцию можно удалить;
     - у акции можно изменить дату окончания;
-    - изменить шаблон email используя доступный редактор;
+    - изменить шаблон email (используя например [CKEditor](https://github.com/ckeditor/ckeditor5));
  - добавить кнопку создания новой акции по кнопке;
     - по нажатию на кнопку открывается форма создания новой акции;
     - возможность создания шаблона email используя доступный редактор;
