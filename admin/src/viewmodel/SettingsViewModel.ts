@@ -46,7 +46,7 @@ export default class SettingsViewModel {
   ExportCsv() {
     var csv = Papa.unparse(Array.from(this.selected), {
       columns: [
-        "id", "name", "price", "thumbnailUrl"
+        "id", "name", "price", "imageUrl"
       ]
     })
     const blob = new Blob([csv], { type: 'text/plain' })

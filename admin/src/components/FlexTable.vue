@@ -15,7 +15,7 @@
         <div class="flex-table__col flex-table__col--align-left">{{ product.id }}</div>
         <div class="flex-table__col flex-table__col--align-left">{{ product.name }}</div>
         <div class="flex-table__col flex-table__col--align-left">{{ product.price }}</div>
-        <div class="flex-table__col flex-table__col--align-left"><img :src="product.thumbnailUrl" width="100" /></div>
+        <div class="flex-table__col flex-table__col--align-left"><img :src="product.imageUrl" width="100" /></div>
       </div>
     </div>
   </div>

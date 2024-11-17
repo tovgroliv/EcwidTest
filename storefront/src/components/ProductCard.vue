@@ -9,8 +9,8 @@
           </div>
           <div class="grid-product__bg" style="background-color: rgb(219, 217, 219);"></div>
           <div class="grid-product__image-wrap">
-            <img :src=product.thumbnailUrl
-              :srcset="product.thumbnailUrl+' 1x, '+product.thumbnailUrl+' 2x'"
+            <img :src=product.imageUrl
+              :srcset="product.imageUrl+' 1x, '+product.imageUrl+' 2x'"
               :alt=product.name :title=product.name style="width: 100%; height: 100%;" width="1000" height="1500" loading="lazy"
               class="grid-product__picture">
           </div>
