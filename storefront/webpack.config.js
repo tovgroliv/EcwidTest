@@ -33,7 +33,9 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: './public/index.html'
+    }),
     new MiniCssExtractPlugin({
       filename: 'style.min.css'
     })

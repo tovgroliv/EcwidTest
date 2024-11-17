@@ -25,3 +25,9 @@
 .grid__wrap {
   width: 100%;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
