@@ -8,8 +8,6 @@ import App from './App.vue';
 declare var Ecwid: IEcwid
 let loaded: Boolean = false
 
-console.log("TEST")
-
 Ecwid.OnAPILoaded.add(function () {
   Ecwid.OnPageLoaded.add(function (page) {
     if (page.type == "CART") {
